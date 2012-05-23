@@ -29,7 +29,6 @@ THE SOFTWARE.
 PLUGINS:
 --------
 
-check_puppetdb_dups.php  check_puppetdb_memory.php  check_puppetdb_populations.php
 **check_puppetdb_dups:**
 
 This check reports the percent of catalogs and resources that are duplicated.
