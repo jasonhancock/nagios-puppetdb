@@ -31,7 +31,7 @@ use Nagios::Plugin;
 use Nagios::Plugin::Threshold;
 
 my $np = Nagios::Plugin->new(
-    usage     => "Usage: %s [-H|--host=<host> ] [ -p|--port=<port> ] [-s]\n" 
+    usage     => "Usage: %s [-H|--host=<host> ] [ -p|--port=<port> ] [-s]\n"
                . "        [-w|--warning=<warning>] [-c|--critical=<critical>]",
     shortname => 'Java Memory',
 );
@@ -67,7 +67,7 @@ $np->add_arg(
 
 $np->getopts;
 
-my $base_url = sprintf('http%s://%s:%d/metrics/mbean/', 
+my $base_url = sprintf('http%s://%s:%d/v2/metrics/mbean/', 
     defined($np->opts->ssl) ? 's' : '',
     $np->opts->host,
     $np->opts->port

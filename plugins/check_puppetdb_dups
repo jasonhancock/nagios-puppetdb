@@ -58,7 +58,7 @@ my %mbeans = (
     'resources' => 'com.puppetlabs.puppetdb.query.population:type=default,name=pct-resource-dupes',
 );
 
-my $base_url = sprintf('http%s://%s:%d/metrics/mbean/', 
+my $base_url = sprintf('http%s://%s:%d/v2/metrics/mbean/', 
     defined($np->opts->ssl) ? 's' : '',
     $np->opts->host,
     $np->opts->port
