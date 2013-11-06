@@ -121,7 +121,7 @@ define command{
 }
 
 define command{
-    command_name check_puppetdb_queue
+    command_name check_puppetdb_processed
     command_line $USER1$/check_puppetdb_processed -H $HOSTADDRESS$ -p 443 -s
 }
 
