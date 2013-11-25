@@ -97,6 +97,10 @@ $np->add_perfdata(
     label => 'used',
     value => $data->{'HeapMemoryUsage'}->{'used'}, 
     uom   => undef,
+    threshold => Nagios::Plugin::Threshold->set_thresholds(
+      warning  => $np->opts->warning  * .01 * $data->{'HeapMemoryUsage'}->{'max'},
+      critical => $np->opts->critical * .01 * $data->{'HeapMemoryUsage'}->{'max'},
+    )
 );
 
 my $code = $np->check_threshold(
@@ -107,8 +111,8 @@ my $code = $np->check_threshold(
 
 $np->nagios_exit(
     return_code => $code,
-    message     => sprintf('used: %d maximum: %d',
-        $data->{'HeapMemoryUsage'}->{'used'},
-        $data->{'HeapMemoryUsage'}->{'max'},
+    message     => sprintf('used: %d MB of maximum: %d MB',
+        $data->{'HeapMemoryUsage'}->{'used'}/1024/1024,
+        $data->{'HeapMemoryUsage'}->{'max'}/1024/1024,
     ),
 );
