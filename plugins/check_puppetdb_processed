@@ -83,6 +83,12 @@ my $data = decode_json($response->decoded_content);
 $np->add_perfdata(
     label => 'processed',
     value => $data->{'Count'}, 
+    uom   => 'c',
+);
+
+$np->add_perfdata(
+    label => 'processed_since_startup',
+    value => $data->{'Count'}, 
     uom   => undef,
 );
 
