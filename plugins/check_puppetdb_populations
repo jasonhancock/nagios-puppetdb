@@ -54,11 +54,11 @@ $np->add_arg(
 $np->getopts;
 
 my %mbeans = (
-    'resources' => 'com.puppetlabs.puppetdb.query.population:type=default,name=num-resources',
-    'nodes'     => 'com.puppetlabs.puppetdb.query.population:type=default,name=num-nodes',
+    'resources' => 'puppetlabs.puppetdb.query.population:type=default,name=num-resources',
+    'nodes'     => 'puppetlabs.puppetdb.query.population:type=default,name=num-nodes',
 );
 
-my $base_url = sprintf('http%s://%s:%d/v2/metrics/mbean/', 
+my $base_url = sprintf('http%s://%s:%d/metrics/v1/mbeans/',
     defined($np->opts->ssl) ? 's' : '',
     $np->opts->host,
     $np->opts->port
