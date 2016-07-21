@@ -67,7 +67,7 @@ $np->add_arg(
 
 $np->getopts;
 
-my $base_url = sprintf('http%s://%s:%d/v2/metrics/mbean/', 
+my $base_url = sprintf('http%s://%s:%d/metrics/v1/mbeans/',
     defined($np->opts->ssl) ? 's' : '',
     $np->opts->host,
     $np->opts->port
@@ -87,6 +87,11 @@ if (!$response->is_success) {
 
 my $data = decode_json($response->decoded_content);
 
+$np->set_thresholds(
+    warning  => int($np->opts->warning  * .01 * $data->{'HeapMemoryUsage'}->{'max'}),
+    critical => int($np->opts->critical * .01 * $data->{'HeapMemoryUsage'}->{'max'}),
+);
+
 $np->add_perfdata(
     label => 'maximum',
     value => $data->{'HeapMemoryUsage'}->{'max'}, 
@@ -97,12 +102,11 @@ $np->add_perfdata(
     label => 'used',
     value => $data->{'HeapMemoryUsage'}->{'used'}, 
     uom   => undef,
+    threshold => $np->threshold(),
 );
 
 my $code = $np->check_threshold(
     check    => $data->{'HeapMemoryUsage'}->{'used'},
-    warning  => $np->opts->warning  * .01 * $data->{'HeapMemoryUsage'}->{'max'},
-    critical => $np->opts->critical * .01 * $data->{'HeapMemoryUsage'}->{'max'},
 );
 
 $np->nagios_exit(
