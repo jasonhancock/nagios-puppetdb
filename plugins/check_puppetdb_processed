@@ -70,7 +70,7 @@ my $ua = new LWP::UserAgent;
 $ua->default_header('Accept' => 'application/json');
 
 
-my $url = $base_url . 'puppetlabs.puppetdb.command:type=global,name=processed';
+my $url = $base_url . 'puppetlabs.puppetdb.mq:name=global.processed';
 my $response = $ua->get($url);
 
 if (!$response->is_success) {

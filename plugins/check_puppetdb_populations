@@ -54,8 +54,8 @@ $np->add_arg(
 $np->getopts;
 
 my %mbeans = (
-    'resources' => 'puppetlabs.puppetdb.query.population:type=default,name=num-resources',
-    'nodes'     => 'puppetlabs.puppetdb.query.population:type=default,name=num-nodes',
+    'resources' => 'puppetlabs.puppetdb.population:name=num-resources',
+    'nodes'     => 'puppetlabs.puppetdb.population:name=num-nodes',
 );
 
 my $base_url = sprintf('http%s://%s:%d/metrics/v1/mbeans/',
